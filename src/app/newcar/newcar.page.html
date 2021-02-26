@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-toolbar style="text-align:center;">
+    <ion-label>Nuevo vehiculo</ion-label>
+    <ion-buttons slot="end" (click)="dismiss()">
+      <ion-icon slot="center" ios="close" md="close"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <img src="../../assets/images/logo_marcas/ford.png" />
+
+  <ion-item lines="full">
+    <ion-label position="floating">Marca</ion-label>
+    <ion-select value="todos" okText="Ok" cancelText="Cancelar">
+      <ion-select-option value="todos"> - Todos - </ion-select-option>
+      <ion-select-option value="brown">Toyota</ion-select-option>
+      <ion-select-option value="blonde">Masda</ion-select-option>
+      <ion-select-option value="black">Ford</ion-select-option>
+      <ion-select-option value="red">Mitsubishi</ion-select-option>
+    </ion-select>
+  </ion-item>
+  
+  <ion-item lines="full">
+    <ion-label position="floating">Modelo</ion-label>
+    <ion-select value="todos" okText="Ok" cancelText="Cancelar">
+      <ion-select-option value="todos"> - Todos - </ion-select-option>
+      <ion-select-option value="brown">Vitz</ion-select-option>
+      <ion-select-option value="blonde">Demio</ion-select-option>
+      <ion-select-option value="black">Ecosport</ion-select-option>
+      <ion-select-option value="red">Mirage</ion-select-option>
+    </ion-select>
+  </ion-item>
+  
+  <ion-item lines="full">
+    <ion-label position="floating">A&ntilde;o</ion-label>
+    <ion-select value="todos" okText="Ok" cancelText="Cancelar">
+      <ion-select-option value="todos"> - Seleccione el A&ntilde;o - </ion-select-option>
+      <ion-select-option value="brown">2014</ion-select-option>
+      <ion-select-option value="blonde">2015</ion-select-option>
+      <ion-select-option value="black">2016</ion-select-option>
+      <ion-select-option value="red">2017</ion-select-option>
+      <ion-select-option value="red">2018</ion-select-option>
+      <ion-select-option value="red">2019</ion-select-option>
+      <ion-select-option value="red">2020</ion-select-option>
+    </ion-select>
+  </ion-item>
+  
+  <ion-item lines="full">
+    <ion-label position="floating">Transmisi&oacute;n</ion-label>
+    <ion-select value="todos" okText="Ok" cancelText="Cancelar">
+      <ion-select-option value="todos"> - Transmision - </ion-select-option>
+      <ion-select-option value="brown">Automatica</ion-select-option>
+      <ion-select-option value="blonde">Mecanica</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item lines="full">
+    <ion-label position="floating">Chasis</ion-label>
+    <ion-input placeholder="Chasis" value="1GNCS13Z6M0246591"></ion-input>
+    <ion-button type="submit" color="danger" slot="end"><ion-icon name="search"></ion-icon> Escanear</ion-button>
+  </ion-item>
+
+  <ion-row>
+    <ion-col>
+      <ion-button type="submit" color="danger" expand="block" >Guardar veh&iacute;culo</ion-button>
+    </ion-col>
+  </ion-row>
+
+</ion-content>

@@ -1,0 +1,230 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Mecanica en linea</ion-title>
+  </ion-toolbar>
+  <ion-toolbar style="text-align:center;">
+    <ion-label>Agendar Cita</ion-label>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-segment scrollable [value]="currentSlide" (ionChange)="segmentChanged($event)" #segment>
+    <ion-segment-button value="0">
+      <ion-icon name="car"></ion-icon>
+    </ion-segment-button>
+    <ion-segment-button value="1">
+      <ion-icon name="construct"></ion-icon>
+    </ion-segment-button>
+    <ion-segment-button value="2">
+      <ion-icon name="pin"></ion-icon>
+    </ion-segment-button>
+    <ion-segment-button value="3">
+      <ion-icon name="calendar-outline"></ion-icon>
+    </ion-segment-button>
+  </ion-segment>
+
+  <ion-slides [options]="slideOpts" (ionSlideDidChange)="slideChanged($event)" #slides
+    style="max-height:calc(100% - 65px);overflow-y: scroll;">
+    <ion-slide>
+      <div>
+        <img src="../../assets/images/selectcar.png" />
+
+        <ion-item lines="full">
+          <ion-label position="floating">Veh&iacute;culo</ion-label>
+          <ion-select value="todos" okText="Ok" cancelText="Cancelar">
+            <ion-select-option value="todos"> - Todos - </ion-select-option>
+            <ion-select-option value="brown">Toyota Vitz Blanco A321358</ion-select-option>
+            <ion-select-option value="blonde">Masda Demio Rojo A848464</ion-select-option>
+            <ion-select-option value="black">Ford Ecosport Gris L588755</ion-select-option>
+            <ion-select-option value="red">Mitsubishi Mirage Negro L654218</ion-select-option>
+          </ion-select>
+          <ion-button type="submit" color="danger" (click)="presentModalNewcarPage()" slot="end"><ion-icon name="add"></ion-icon> Agregar</ion-button>
+        </ion-item>
+      
+        <ion-row>
+          <ion-col>
+            <ion-button type="submit" color="danger" expand="block" (click)="slideTo(1)">Siguiente</ion-button>
+          </ion-col>
+        </ion-row>
+
+        <ion-item-divider color="transparent"></ion-item-divider>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div>
+        <img src="../../assets/images/selectwork.png" />
+
+        <ion-item lines="full">
+          <ion-label position="floating">Tipo de servicio</ion-label>
+          <ion-select value="brown" okText="Ok" cancelText="Cancelar">
+            <ion-select-option value="brown">Reparaci&oacute;n</ion-select-option>
+            <ion-select-option value="blonde">Lavado y Detailing</ion-select-option>
+            <ion-select-option value="black">Cambio de aceite y filtro</ion-select-option>
+            <ion-select-option value="red">Cambio de gomas</ion-select-option>
+          </ion-select>
+        </ion-item>
+      
+        <ion-item lines="full">
+          <ion-label position="floating">Descripci&oacute;n / Detalles</ion-label>
+          <ion-textarea rows="6" cols="20" placeholder="Detalles"></ion-textarea>
+        </ion-item>
+
+        <ion-row>
+          <ion-col>
+            <ion-button type="submit" color="danger" expand="block" (click)="slideTo(2)">Siguiente</ion-button>
+          </ion-col>
+        </ion-row>
+
+        <ion-item-divider color="transparent"></ion-item-divider>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div>
+        <img src="../../assets/images/selectlocation.png" />
+
+        <ion-item lines="full">
+          <ion-label position="floating">Direcci&oacute;n a retirar</ion-label>
+          <ion-select value="brown" okText="Ok" cancelText="Cancelar">
+            <ion-select-option value="brown">Home</ion-select-option>
+            <ion-select-option value="blonde">Office</ion-select-option>
+            <ion-select-option value="black">Parents</ion-select-option>
+          </ion-select>
+        </ion-item>
+        
+        <!-- <ion-item lines="full">
+          <ion-label position="floating">Chofer</ion-label>
+          <ion-select value="brown" okText="Ok" cancelText="Cancelar">
+            <ion-select-option value="brown">Carl Brown</ion-select-option>
+            <ion-select-option value="blonde">Edmund Steel</ion-select-option>
+            <ion-select-option value="black">Christian Black</ion-select-option>
+            <ion-select-option value="red">Gred Curl</ion-select-option>
+          </ion-select>
+        </ion-item> -->
+      
+        <ion-row>
+          <ion-col>
+            <ion-button type="submit" color="danger" expand="block" (click)="slideTo(3)">Siguiente</ion-button>
+          </ion-col>
+        </ion-row>
+
+        <ion-item-divider color="transparent"></ion-item-divider>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div>
+        <img src="../../assets/images/selectcalendar.png" />
+
+        <ion-item lines="full">
+          <ion-label>Fecha</ion-label>
+          <ion-datetime displayFormat="YYYY-MM-DD" min={{minDate}} max="2050-12-31" placeholder="Selecciona una fecha"></ion-datetime>
+          <!-- <ion-datetime displayFormat="YYYY-MM-DD HH:00" min={{minDate}} max="2050-12-31" placeholder="Selecciona una fecha"></ion-datetime> -->
+        </ion-item>
+
+        <ion-item-divider>
+          <p>Selecciona la hora del t&eacute;cnico de su preferencia.</p>
+        </ion-item-divider>
+        
+        
+          <ion-item lines="full">
+            <ion-grid>
+              <ion-row>
+                <h3 style="margin: 0px;width: 100%;">Carl Brown</h3>
+                <p style="margin-top:0px;font-size: 12px;color:#777777;">A 237.05 Mts - 15 mins de su ubicaci&oacute;n</p>
+              </ion-row>
+              <ion-row class="table_horas">
+                <ion-chip [color]="horaSelected == '07' ? 'success' : ''" (click)="selectHora($event,'07')" >
+                  <ion-label>07:00</ion-label>
+                </ion-chip>
+                <ion-chip [color]="horaSelected == '08' ? 'success' : ''" (click)="selectHora($event,'08')" >
+                  <ion-label>08:00</ion-label>
+                </ion-chip>
+                <ion-chip color="danger">
+                  <ion-label>09:00</ion-label>
+                </ion-chip>
+                <ion-chip [color]="horaSelected == '10' ? 'success' : ''" (click)="selectHora($event,'10')" >
+                  <ion-label>10:00</ion-label>
+                </ion-chip>
+                <ion-chip [color]="horaSelected == '11' ? 'success' : ''" (click)="selectHora($event,'11')" >
+                  <ion-label>11:00</ion-label>
+                </ion-chip>
+                <ion-chip color="danger">
+                  <ion-label>12:00</ion-label>
+                </ion-chip>
+                <ion-chip [color]="horaSelected == '13' ? 'success' : ''" (click)="selectHora($event,'13')" >
+                  <ion-label>13:00</ion-label>
+                </ion-chip>
+                <ion-chip [color]="horaSelected == '14' ? 'success' : ''" (click)="selectHora($event,'14')" >
+                  <ion-label>14:00</ion-label>
+                </ion-chip>
+                <ion-chip color="danger">
+                  <ion-label>15:00</ion-label>
+                </ion-chip>
+                <ion-chip [color]="horaSelected == '16' ? 'success' : ''" (click)="selectHora($event,'16')" >
+                  <ion-label>16:00</ion-label>
+                </ion-chip>
+                <ion-chip [color]="horaSelected == '17' ? 'success' : ''" (click)="selectHora($event,'17')" >
+                  <ion-label>17:00</ion-label>
+                </ion-chip>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+          <ion-item lines="full">
+            <ion-grid>
+              <ion-row>
+                <h3 style="margin: 0px;width: 100%;">George Belt</h3>
+                <p style="margin-top:0px;font-size: 12px;color:#777777;">A 237.05 Mts - 15 mins de su ubicaci&oacute;n</p>
+              </ion-row>
+              <ion-row class="table_horas">
+                <ion-chip [color]="horaSelected == '07' ? 'success' : ''" (click)="selectHora($event,'07')" >
+                  <ion-label>07:00</ion-label>
+                </ion-chip>
+                <ion-chip [color]="horaSelected == '08' ? 'success' : ''" (click)="selectHora($event,'08')" >
+                  <ion-label>08:00</ion-label>
+                </ion-chip>
+                <ion-chip [color]="horaSelected == '09' ? 'success' : ''" (click)="selectHora($event,'09')" >
+                  <ion-label>09:00</ion-label>
+                </ion-chip>
+                <ion-chip [color]="horaSelected == '10' ? 'success' : ''" (click)="selectHora($event,'10')" >
+                  <ion-label>10:00</ion-label>
+                </ion-chip>
+                <ion-chip [color]="horaSelected == '11' ? 'success' : ''" (click)="selectHora($event,'11')" >
+                  <ion-label>11:00</ion-label>
+                </ion-chip>
+                <ion-chip [color]="horaSelected == '12' ? 'success' : ''" (click)="selectHora($event,'12')" >
+                  <ion-label>12:00</ion-label>
+                </ion-chip>
+                <ion-chip [color]="horaSelected == '13' ? 'success' : ''" (click)="selectHora($event,'13')" >
+                  <ion-label>13:00</ion-label>
+                </ion-chip>
+                <ion-chip [color]="horaSelected == '14' ? 'success' : ''" (click)="selectHora($event,'14')" >
+                  <ion-label>14:00</ion-label>
+                </ion-chip>
+                <ion-chip [color]="horaSelected == '15' ? 'success' : ''" (click)="selectHora($event,'15')" >
+                  <ion-label>15:00</ion-label>
+                </ion-chip>
+                <ion-chip [color]="horaSelected == '16' ? 'success' : ''" (click)="selectHora($event,'16')" >
+                  <ion-label>16:00</ion-label>
+                </ion-chip>
+                <ion-chip [color]="horaSelected == '17' ? 'success' : ''" (click)="selectHora($event,'17')" >
+                  <ion-label>17:00</ion-label>
+                </ion-chip>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+        
+
+        <ion-row>
+          <ion-col>
+            <ion-button type="submit" color="danger" expand="block" (click)="createCita()">Agendar</ion-button>
+          </ion-col>
+        </ion-row>
+
+        <ion-item-divider color="transparent"></ion-item-divider>
+      </div>
+    </ion-slide>
+  </ion-slides>
+</ion-content>

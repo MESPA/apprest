@@ -1,0 +1,103 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Fengos Burguer</ion-title>
+  </ion-toolbar>
+  <ion-toolbar style="text-align:center;">
+    <ion-label>Metodos de pago</ion-label>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-title>
+    <h3>Ya casi terminamos</h3>
+  </ion-title>
+
+  <ion-item color="light">
+    <ion-icon slot="start" ios="cash-outline" md="cash-outline"></ion-icon>
+    <ion-label>
+      <h2>Total</h2>
+    </ion-label>
+  <ion-label slot="end">RD$ {{cartService.addDecimalCeroString(cartService.order.total)}}</ion-label>
+  </ion-item>
+
+  <ion-item-divider color="">
+    <ion-label>
+      Metodos de pago
+    </ion-label>
+  </ion-item-divider>
+  <ion-list>
+    <ion-radio-group [(ngModel)]="paymentService.paymentSelected">
+      <ion-item (click)="paymentService.selectPaymentEfectivo()">
+        <ion-label>
+          <h3>Efectivo</h3>
+          <p>RD${{cartService.addDecimalCeroString(cartService.order.total)}}</p>
+        </ion-label>
+        <ion-radio slot="start" [value]="paymentService.efectivo"></ion-radio>
+        <ion-icon slot="end" color="light" ios="star" md="star"></ion-icon>
+        <ion-thumbnail slot="end">
+          <ion-img src="../../assets/images/payment/cash.png"></ion-img>
+        </ion-thumbnail>
+      </ion-item>
+
+      <!-- <ion-item style>
+        <ion-label>
+          <h3>Paypal</h3>
+          <p>www.paypal.com</p>
+          </ion-label>
+        <ion-radio slot="start" value="paypal"></ion-radio>
+        <ion-icon slot="end" color="light" ios="star" md="star"></ion-icon>
+        <ion-thumbnail slot="end">
+          <ion-img src="../../assets/images/payment/paypal.png"></ion-img>
+        </ion-thumbnail>
+      </ion-item> -->
+      
+      <ion-item-divider color="">
+        <ion-label>
+          Guardados
+        </ion-label>
+      </ion-item-divider>
+
+      <ion-item-sliding *ngFor="let payment of paymentService.payments; let i = index" (click)="selectPayment(i)">
+        <ion-item>
+          <ion-icon name="ellipsis-vertical-outline" slot="start" style="margin: 0px;"></ion-icon>
+          <ion-label>
+            <h3>{{payment.name}}</h3>
+            <p>{{payment.cardNumberPresentation}}</p>
+          </ion-label>
+          <ion-radio slot="start" [value]="payment"></ion-radio>
+          <ion-icon slot="end" color="light" ios="star" md="star"></ion-icon>
+          <ion-thumbnail slot="end">
+            <ion-img src="../../assets/images/payment/azul.png"></ion-img>
+          </ion-thumbnail>
+        </ion-item>
+
+        <ion-item-options side="start">
+          <ion-item-option color="danger" (click)="paymentService.removeFromPayments(i)">
+            <ion-icon slot="icon-only" name="trash"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+  
+    </ion-radio-group>
+  </ion-list>
+  
+  
+  
+  <ion-item-divider color="">
+    <p>
+      Tu metodo de pago por defecto aparecera con una estrella a la derecha.
+      Desliza el dedo sobre algun metodo de pago para editarlo o eliminarlo.
+    </p>
+  </ion-item-divider>
+  <ion-list> 
+      <ion-item>
+        <ion-label>A&ntilde;adir metodo de pago</ion-label>
+        <ion-icon slot="start" ios="add" md="add"></ion-icon>
+      </ion-item>
+    <ion-item-divider></ion-item-divider>
+      <ion-button expand="full" color="mecanica" (click)="continuar()">Continuar</ion-button>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,22 @@
+
+    // ion-content {
+    //   --background: url('../../assets/images/banner.jpg')  0 0/100% 100% no-repeat;
+    // }
+
+    ion-content.content {
+        .scroll-content {
+          padding: 30px;
+        }
+      }
+
+    ion-item {
+        margin: 15px;
+    }
+
+    ion-item ion-label {
+      color:#777777;
+    }
+
+    #logo {
+      width: 100%;
+    }

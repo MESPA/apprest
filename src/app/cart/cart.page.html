@@ -1,0 +1,87 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Fengos Burguer</ion-title>
+  </ion-toolbar>
+  <ion-toolbar style="text-align:center;">
+    <ion-label>Mi carrito</ion-label>
+  </ion-toolbar>
+  <ion-toolbar style="display:none;text-align:center;">
+    <ion-searchbar mode="md" animated style="text-align: left;"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+ <ion-list style="height:85%;overflow-y: scroll;">
+  <ion-item-sliding *ngFor="let product of cartService.order.cart; let i = index">
+    <ion-item>
+      <ion-icon name="ellipsis-vertical-outline" slot="start" style="margin: 0px;"></ion-icon>
+      <ion-avatar slot="start">
+        <img *ngIf="product.foto != ''" [src]="productService.fotoBasePath + product.foto" />
+        <img *ngIf="product.foto == ''" src="../../assets/images/template-burguer.png" />
+      </ion-avatar>
+      <ion-label>
+        <h2>{{product.nombre}}</h2>
+        <p *ngFor="let option of product.options">{{option}}</p>
+        <h2 style="color:red;">RD$ {{product.precio}}</h2>
+        <p>{{product.comment}}</p>
+      </ion-label>
+      <!-- <ion-button fill="outline" slot="end" (click)=goToMap()>View</ion-button> -->
+      <ion-note slot="end" color="mecanica">
+        <ion-badge color="light" (click)="cartService.reduceProductQuantity(i)">-</ion-badge>
+        <ion-badge color="light">{{product.quantity}}</ion-badge>
+        <ion-badge color="light" (click)="cartService.sumProductQuantity(i)">+</ion-badge>
+      </ion-note>
+    </ion-item>
+
+    <ion-item-options side="start">
+      <ion-item-option color="mecanica" (click)="cartService.removeFromCart(i)">
+        <ion-icon slot="icon-only" name="trash"></ion-icon>
+      </ion-item-option>
+      <!-- <ion-item-option>
+        <ion-icon slot="icon-only" name="star"></ion-icon>
+      </ion-item-option> -->
+    </ion-item-options>
+
+    <!-- <ion-item-options side="end">
+      <ion-item-option color="mecanica">
+        <ion-icon slot="icon-only" name="trash"></ion-icon>
+      </ion-item-option>
+      <ion-item-option>
+        <ion-icon slot="icon-only" name="star"></ion-icon>
+      </ion-item-option>
+    </ion-item-options> -->
+  </ion-item-sliding>
+  
+  <ion-item *ngIf="cartService.cartCount != 0" style="margin-top: 15px;">
+    <ion-label slot="end" style="text-align: right;">
+      <p>Subtotal: ${{cartService.addDecimalCeroString(cartService.order.subtotal)}}</p>
+      <p>Itbis: ${{cartService.addDecimalCeroString(cartService.order.itbis)}}</p>
+      <p>Servicio: ${{cartService.addDecimalCeroString(cartService.order.service)}}</p>
+    </ion-label>
+  </ion-item>
+
+
+  <div class="cartEmpty" *ngIf="cartService.cartCount == 0">
+    <img src="../../assets/images/empty-cart.png">
+    <h2>Vacio por aqui</h2>
+    <p>Selecciona algun <a color="mecanica" routerLink="/shop" >producto</a> para comprar.</p>
+  </div>
+ </ion-list>
+
+  
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="8" style="background-color: #e81f25;color:white;text-align: center;">
+        <h2>Total: {{cartService.addDecimalCeroString(cartService.order.total)}}</h2>
+      </ion-col>
+      <ion-col size="4" (click)="continuar()"
+        style="background-color: black;color:white;text-align: center;">
+        <h5>Continuar</h5>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

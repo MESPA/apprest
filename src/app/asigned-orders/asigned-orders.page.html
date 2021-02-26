@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Fengos Burguer</ion-title>
+  </ion-toolbar>
+  <ion-toolbar style="text-align:center;">
+    <ion-label>Pedidos asignados</ion-label>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let order of orderService.asignOrders; let i = index" (click)="orderFollow(order.orden)">
+      <ion-avatar slot="start">
+        <img class="product-image" src="../../assets/images/banners/hamburguesa_fengos_burguer-1024x533.jpg">
+      </ion-avatar>
+      <ion-label>
+        <h2>{{order.orden}}</h2>
+        <p>{{order.direccion}}</p>
+        <p style="color:red;">RD$ {{cartService.addDecimalCeroString(order.total)}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

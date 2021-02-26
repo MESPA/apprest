@@ -1,0 +1,28 @@
+/* GENERATE SIGN APK*/
+
+/*INFORMATION*/
+CERT para app fengos 
+	ALIAS: fengos
+	PASS: P@$$w0rd2020!
+	NAME: Victor La Fortuna
+	ORGANIZATION: fengos
+
+
+/*COMMANDS*/
+	// In project generate release app
+	ionic cordova build --release android
+	
+	// Create certificate with JDK
+	keytool -genkey -v -keystore my-release-key.keystore -alias alias_name -keyalg RSA -keysize 2048 -validity 10000
+	
+	// Sign APK
+	jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore my-release-key.keystore 'platforms\android\app\build\outputs\apk\release\app-release-unsigned.apk' fengos
+	
+	// Optimize apk
+	// zipalign -v 4 'platforms\android\app\build\outputs\apk\release\app-release-unsigned.apk' signed_app.apk
+	// C:\Program Files (x86)\Android\android-sdk\build-tools\28.0.3\zipalign.exe -v 4 'platforms\android\app\build\outputs\apk\release\app-release-unsigned.apk' signed_app.apk
+	
+	
+	cd 'C:\Program Files (x86)\Android\android-sdk\build-tools\28.0.3'
+	./zipalign.exe -v 4 'C:\Users\home\Documents\Projects\git\restaurantapp\restapp - copia\platforms\android\app\build\outputs\apk\release\app-release-unsigned.apk' C:\code\build\signed_app.apk
+	

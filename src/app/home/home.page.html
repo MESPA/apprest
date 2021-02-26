@@ -1,0 +1,122 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Fengos Burguer</ion-title>
+    <ion-buttons slot="end">
+      <ion-button routerDirection="root" routerLink="/cart">
+        {{cartService.cartCount}}
+        <ion-icon slot="start" ios="cart" md="cart"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <!-- <ion-toolbar>
+    <ion-searchbar showCancelButton="focus" placeholder="Buscar producto"></ion-searchbar>
+  </ion-toolbar> -->
+</ion-header>
+
+<ion-content>
+
+  <ion-card>
+    <ion-slides pager="true" [options]="slideOpts">
+      <ion-slide>
+        <img src="../../assets/images/banners/hamburguesa_fengos_burguer-1024x533.jpg" />
+      </ion-slide>
+      <!-- <ion-slide>
+        <img src="../../assets/images/banners/Instalaciones-de-Fengos-Burguer-768x512.jpg" />
+      </ion-slide> -->
+      <ion-slide>
+        <img src="../../assets/images/banners/mofongos_fengos_burguer.jpg" />
+      </ion-slide>
+      <ion-slide>
+        <img src="../../assets/images/banners/slider_mofongos_d_fengos_burguer-300x156.jpg" />
+      </ion-slide>
+    </ion-slides>
+    <ion-card-header *ngIf="userService.user.isLogged">
+      <ion-card-subtitle>Hola</ion-card-subtitle>
+      <ion-card-title>{{userService.userdata.nombreUsuario}}</ion-card-title>
+      <ion-card-subtitle>{{addressService.addressSelected.fulladdress}}</ion-card-subtitle>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-item color="mecanica" id="button_newcita" [routerLink]="['/orders']">
+    <ion-icon slot="start" ios="calendar-outline" md="calendar-outline"></ion-icon>
+    <ion-label>
+      <h2>Ultimas ordenes</h2>
+      <p>Tu historial de ordenes</p>
+    </ion-label>
+  </ion-item> 
+
+  <ion-item-divider>
+    <ion-label>
+      Recomendados
+    </ion-label>
+    <ion-chip slot="end" color="mecanica" routerLink="/shop">
+      <ion-icon name="fast-food-outline" ></ion-icon>
+      <ion-label>Ver todos</ion-label> 
+    </ion-chip>
+  </ion-item-divider>
+
+<ion-slides [options]="slideOpts_RecomendedProducts" #slideRecomendedProducts >
+  <ion-slide *ngFor="let product of productService.allRecomendedProducts">
+    <ion-card class="related-products">  
+      <img *ngIf="product.foto != ''" [src]="productService.fotoBasePath + product.foto" />
+      <img *ngIf="product.foto == ''" src="../../assets/images/template-burguer.png" />
+      <ion-card-header style="text-align: start;">
+        <ion-card-title style="font-weight: 100;">{{ product.nombre }}</ion-card-title>
+        <ion-label style="display:block;">{{ product.descripcion }}</ion-label>
+        <ion-button color="mecanica" expand="block" (click)="presentProductModalById(product.id)" style="margin-top:10px;">
+          <ion-chip color="light" style="margin-right: 10px; color:white;">
+            <ion-icon name="pricetag-outline" ></ion-icon>
+            <ion-label>${{cartService.addDecimalCeroString(product.precio)}}</ion-label> 
+          </ion-chip>
+          Agregar al carrito
+        </ion-button>
+      </ion-card-header>
+      <ion-card-content>
+      </ion-card-content>
+    </ion-card>
+  </ion-slide>
+</ion-slides>
+
+<ion-item-divider>
+  <ion-label>
+    Accesos rapidos
+  </ion-label>
+</ion-item-divider>
+
+
+  <ion-item  [routerLink]="['/account']">
+    <ion-icon slot="start" ios="person" md="person"></ion-icon>
+    <ion-label>
+      <h2>Mis datos</h2>
+      <p>Datos personales, inic...</p>
+    </ion-label>
+    <!-- <ion-button fill="outline" slot="end">View</ion-button> -->
+  </ion-item>
+  <ion-item  [routerLink]="['/orders']">
+    <ion-icon slot="start" ios="time" md="time"></ion-icon>
+    <ion-label>
+      <h2>Mis últimos pedidos</h2>
+      <p>Historial de pedidos</p>
+    </ion-label>
+    <!-- <ion-button fill="outline" slot="end">View</ion-button> -->
+  </ion-item>
+  <!-- <ion-item>
+    <ion-icon slot="start" ios="at" md="at"></ion-icon>
+    <ion-label>
+      <h2>Mis direcciones</h2>
+      <p>Home, Office, ...</p>
+    </ion-label>
+    <ion-button fill="outline" slot="end">View</ion-button>
+  </ion-item> -->
+  <!-- <ion-item>
+    <ion-icon slot="start" ios="at" md="at"></ion-icon>
+    <ion-label>
+      <h2>Mapa</h2>
+      <p>Mapa de usuario ...</p>
+    </ion-label>
+    <ion-button fill="outline" slot="end" (click)=goToMap()>View</ion-button>
+  </ion-item> -->
+</ion-content>

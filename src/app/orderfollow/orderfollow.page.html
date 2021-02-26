@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Fengos Burguer</ion-title>
+  </ion-toolbar>
+  <ion-toolbar style="text-align:center;">
+    <ion-label>Seguimiento</ion-label>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div id="mapId" style="width: 100%; height: 100%">
+  </div>
+
+  <div class="bottomSheet" (touchmove)="touchMove($event)" (touchend)="touchEnd()">
+
+    <div class="swipe-handler"></div>
+
+    <div class="content ion-padding">
+      <h1>Detalle de la orden</h1>
+      <p>{{mapService.statusText}}</p>
+      
+      <ion-progress-bar *ngIf="mapService.status < 2" color="danger" type="indeterminate" buffer="0.5"></ion-progress-bar>
+      <ion-progress-bar *ngIf="mapService.status == 2" color="warning" value="0.5"></ion-progress-bar>
+      <ion-progress-bar *ngIf="mapService.status == 3" color="success" value="1.0"></ion-progress-bar>
+      
+      <br>
+      <ion-item *ngFor="let product of mapService.products">
+        <ion-label>
+          <p style="font-weight: bold;">{{ "("+product.cantidadProducto+") "+ product.nombreProducto }}</p>
+          <p style="font-weight:normal;">{{ product.adicionalesProducto  }}</p>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          <p style="font-weight: bold;">Dirección</p>
+          <p style="font-weight:normal;">{{ mapService.direccion }}</p>
+        </ion-label>
+      </ion-item>
+    </div>
+
+  </div>
+
+</ion-content>

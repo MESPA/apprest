@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    
+    <ion-title>Registrarme</ion-title>
+    
+    <ion-buttons slot="end" (click)="dismiss()">
+      <ion-icon slot="icon-only" ios="close" md="close"></ion-icon>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <img id="logo" src="../../assets/images/logo.png">
+  
+    <ion-item lines="full">
+      <ion-label position="floating">Nombre completo</ion-label>
+      <ion-input type="text" [(ngModel)]="user.nombreUsuario" required></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Telefono</ion-label>
+      <ion-input type="text" [(ngModel)]="user.telefonoUsuario" required></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Correo electronico</ion-label>
+      <ion-input type="email" [(ngModel)]="user.username" required></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Contrase&ntilde;a</ion-label>
+      <ion-input type="password" [(ngModel)]="user.password" required></ion-input>
+    </ion-item>
+
+    <ion-row>
+      <ion-col>
+        <ion-button type="submit" color="mecanica" expand="block" (click)="createAccount()">Registrarme</ion-button>
+      </ion-col>
+    </ion-row>
+  
+</ion-content>

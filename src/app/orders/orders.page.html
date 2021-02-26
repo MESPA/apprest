@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Fengos Burguer</ion-title>
+  </ion-toolbar>
+  <ion-toolbar style="text-align:center;">
+    <ion-label>Mis ordenes</ion-label>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let order of orderService.orders; let i = index" (click)="orderFollow(order.ordenid)">
+      <ion-avatar slot="start">
+        <img class="product-image" src="../../assets/images/banners/hamburguesa_fengos_burguer-1024x533.jpg">
+      </ion-avatar>
+      <ion-label>
+        <h2>{{order.ordenid}}</h2>
+        <p>{{order.direccion}}</p>
+        <p style="color:red;">RD$ {{cartService.addDecimalCeroString(order.total)}}</p>
+      </ion-label>
+
+      <ion-badge *ngIf="order.estadoPedidoID == null" color="light">Preparando</ion-badge>
+      <ion-badge *ngIf="order.estadoPedidoID == 1" color="warning">En camino</ion-badge>
+      <ion-badge *ngIf="order.estadoPedidoID == 2" color="success">Entragada</ion-badge>
+      
+    </ion-item>
+  </ion-list>
+</ion-content>

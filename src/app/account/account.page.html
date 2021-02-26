@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Fengos Burguer</ion-title>
+  </ion-toolbar>
+  <ion-toolbar style="text-align:center;">
+    <ion-label>Mi cuenta</ion-label>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <!-- <ion-avatar slot="start" >
+      <img src="../assets/images/luffy1.jpg">
+    </ion-avatar> -->
+    <ion-icon slot="start" name="person-circle-outline"></ion-icon>
+    <ion-label position="floating">Nombre</ion-label>
+    <ion-input [(ngModel)]="userService.userdata.nombreUsuario"></ion-input>
+  </ion-item>
+
+  <ion-item-divider></ion-item-divider>
+
+  <ion-item>
+    <ion-icon slot="start" name="call-outline"></ion-icon>
+    <ion-label position="floating">Telefono</ion-label>
+    <ion-input [(ngModel)]="userService.userdata.telefono" placeholder="Ej. 8097654321"></ion-input>
+  </ion-item>
+  <ion-item (click)="presentAddressModal()">
+    <ion-icon slot="start" name="map-outline"></ion-icon>
+    <ion-label>
+      <h3>Direccion</h3>
+      <p>{{addressService.addressSelected.fulladdress}}</p>
+    </ion-label>
+    <ion-badge color="mecanica">Editar</ion-badge>
+  </ion-item>
+
+  <ion-item-divider>Datos de acceso</ion-item-divider>
+  <ion-item>
+    <ion-icon slot="start" name="call-outline"></ion-icon>
+    <ion-label position="floating">Correo</ion-label>
+    <ion-input [(ngModel)]="userService.userdata.userID" readonly></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-icon slot="start" name="call-outline"></ion-icon>
+    <ion-label position="floating">Contraseña</ion-label>
+    <ion-input type="password" [(ngModel)]="userService.userdata.password" placeholder="******"></ion-input>
+  </ion-item>
+  <ion-item-divider></ion-item-divider>
+  <ion-button expand="block" color="mecanica"
+    (click)="saveAccount()">Guardar cambios</ion-button>
+
+</ion-content>

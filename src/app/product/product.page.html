@@ -1,0 +1,83 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Producto</ion-title>
+
+    <ion-buttons slot="end" (click)="dismiss()">
+      <ion-icon slot="icon-only" ios="close" md="close"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="related-products">  
+    <img *ngIf="product.foto != ''" [src]="productService.fotoBasePath + product.foto" />
+    <img *ngIf="product.foto == ''" src="../../assets/images/template-burguer.png" />
+    <ion-card-header style="text-align: start;">
+      <ion-card-title style="font-weight: 100;">{{product.nombre}}</ion-card-title>
+      <ion-label style="display:block;">{{product.descripcion}}</ion-label>
+      
+      <ion-chip color="light">
+        <ion-icon name="pricetag-outline" color="mecanica"></ion-icon>
+        <ion-label color="mecanica">RD$ {{cartService.addDecimalCeroString(product.precio)}}</ion-label>
+      </ion-chip>
+
+      <ion-item color="mecanica" id="button_newcita" >
+        <ion-button color="light" class="margin_3" slot="start" (click)="removeOne()">
+          <ion-icon slot="icon-only" ios="remove-outline" md="remove-outline"></ion-icon>
+        </ion-button>
+        <ion-chip class="margin_3" slot="start" color="light">
+          <ion-label color="light">{{product.quantity}}</ion-label>
+        </ion-chip>
+        <ion-button class="margin_3" color="light" slot="start" (click)="addOne()">
+          <ion-icon slot="icon-only" ios="add-outline" md="add-outline"></ion-icon>
+        </ion-button>
+        <ion-title color="light" style="margin-right: 10px; color:white;">
+          <ion-label>RD$ {{cartService.addDecimalCeroString(product.subtotal)}}</ion-label> 
+        </ion-title>
+      </ion-item>
+      
+    </ion-card-header>
+    <ion-card-content>
+    </ion-card-content>
+  </ion-card>
+  <ion-item-divider *ngIf="aditionals.length > 0">
+    <ion-label>
+      Opciones
+    </ion-label>
+  </ion-item-divider>
+  <ion-card class="related-products" *ngIf="aditionals.length > 0">  
+    <ion-list>
+      <ion-radio-group *ngFor="let aditional of aditionals; let i = index" [value]="aditional.nombreAdicional" [(ngModel)]="product.options[i]">
+        <ion-list-header>
+          <ion-label>{{aditional.nombreAdicional}}</ion-label>
+        </ion-list-header>
+    
+        <ion-item *ngFor="let option of aditional.opciones">
+          <ion-label>{{option.nombreOpcion}}</ion-label>
+          <ion-radio color="mecanica" slot="start" [value]="aditional.nombreAdicional +' '+ option.nombreOpcion"></ion-radio>
+        </ion-item>
+    
+        
+      </ion-radio-group>
+    </ion-list>
+  </ion-card>
+
+  <ion-item-divider>
+    <ion-label>
+      Indicaciones
+    </ion-label>
+  </ion-item-divider>
+  <ion-item>
+    <ion-textarea [(ngModel)]="product.comment" placeholder="Indicaciones"></ion-textarea>
+  </ion-item>
+
+  <ion-button 
+    class="md button button-block button-solid ion-activatable ion-focusable hydrated"
+    color="mecanica" expand="block" (click)=addtoCart() style="margin-top:10px;">
+    <ion-chip color="light" style="margin-right: 10px; color:white;">
+      <ion-icon name="cart-outline" ></ion-icon>
+      <ion-label>RD$ {{cartService.addDecimalCeroString(product.subtotal)}}</ion-label> 
+    </ion-chip>
+    Agregar al carrito
+  </ion-button>
+</ion-content>

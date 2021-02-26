@@ -1,0 +1,78 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Fengos Burguer</ion-title>
+    <ion-buttons slot="end">
+      <ion-button routerDirection="root" routerLink="/cart">
+        {{cartService.cartCount}}
+        <ion-icon slot="start" ios="cart" md="cart"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar style="text-align:center;">
+    <ion-searchbar mode="md" [animated]="true" style="text-align: left;"
+      [showCancelButton]="Cancelar"
+      (ionInput)="onSearchInput($event)"
+      (ionCancel)="onSearchCancel($event)"
+      placeholder="Buscar"
+    ></ion-searchbar>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-segment color="light" scrollable [value]="currentSlide" (ionChange)="segmentChanged($event)" #segment>
+        <ion-segment-button value="0" id="0">
+          <ion-label>Todos</ion-label>
+        </ion-segment-button>
+        <ion-segment-button *ngFor="let category of productService.allCategoriesWithProducts; let i = index" [value]="i+1" [id]="i+1">
+          <ion-label>{{category.nombreCategoria}}</ion-label>
+        </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-slides [options]="slideOpts" (ionSlideDidChange)="slideChanged($event)" #slides
+    style="max-height:100%;overflow-y: scroll;">
+
+    <ion-slide>
+      <ion-list style="height:100%;overflow-y: scroll;">
+        <ion-item *ngFor="let product of productService.allProducts; let i = index" (click)="presentProductModal(i)">
+            <ion-icon name="ellipsis-vertical-outline" slot="start" style="margin: 0px;"></ion-icon>
+            <ion-avatar slot="start">
+              <!-- <img class="product-image" src="../../assets/images/banners/hamburguesa_fengos_burguer-1024x533.jpg"> -->
+              <img class="product-image" *ngIf="product.foto != ''" [src]="productService.fotoBasePath + product.foto" />
+              <img class="product-image" *ngIf="product.foto == ''" src="../../assets/images/template-burguer.png" />
+            </ion-avatar>
+            <ion-label>
+              <h2>{{product.nombre}}</h2>
+              <p>{{product.descripcion}}</p>
+              <h2 style="color:red;">RD$ {{cartService.addDecimalCeroString(product.precio)}}</h2>
+            </ion-label>
+          </ion-item>
+      </ion-list>
+    </ion-slide>
+
+    <ion-slide *ngFor="let category of productService.allCategoriesWithProducts">
+        <ion-list style="height:100%;overflow-y: scroll;">
+          <ion-item *ngFor="let product of category.products; let ii = index" (click)="presentProductModalById(product.id)">
+              <ion-icon name="ellipsis-vertical-outline" slot="start" style="margin: 0px;"></ion-icon>
+              <ion-avatar slot="start">
+                <img class="product-image" *ngIf="product.foto != ''" [src]="productService.fotoBasePath + product.foto" />
+                <img class="product-image" *ngIf="product.foto == ''" src="../../assets/images/template-burguer.png" />
+              </ion-avatar>
+              <ion-label>
+                <h2>{{product.nombre}}</h2>
+                <p>{{product.descripcion}}</p>
+                <h2 style="color:red;">RD$ {{cartService.addDecimalCeroString(product.precio)}}</h2>
+              </ion-label>
+            </ion-item>
+        </ion-list>
+    </ion-slide>
+
+  </ion-slides>
+
+
+
+
+</ion-content>

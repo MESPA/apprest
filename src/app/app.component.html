@@ -1,0 +1,108 @@
+<ion-app>
+  <ion-split-pane contentId="main-content">
+    <ion-menu contentId="main-content" type="overlay">
+      <ion-content>
+        <ion-list id="inbox-list" style="border-bottom: none;">
+          <img id="logo" src="../assets/images/logo.png">
+          
+          <ion-menu-toggle auto-hide="false">
+            <ion-item routerDirection="root" routerLink="account">
+              <ion-avatar slot="start" >
+                <img src="../assets/images/luffy1.jpg">
+              </ion-avatar>
+              <ion-label>
+                <h2>Hola!</h2>
+                <p *ngIf="userService.user.isLogged">{{userService.userdata.nombreUsuario}}</p>
+                <p *ngIf="userService.user.isLogged"><a routerLink="account">Mi cuenta</a></p>
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+
+          <!-- <ion-item-divider color="transparent"></ion-item-divider> -->
+          
+          <ion-menu-toggle auto-hide="false" >
+            <ion-item routerDirection="root" routerLink="home" lines="none" detail="false" [class.selected]="selectedIndex == i">
+              <ion-icon slot="start" ios="home-outline" md="home-sharp"></ion-icon>
+              <ion-label>Inicio</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+          
+          <!-- <ion-menu-toggle auto-hide="false" *ngIf="userService.user.isLogged">
+            <ion-item routerDirection="root" routerLink="favorite" lines="none" detail="false" [class.selected]="selectedIndex == i">
+              <ion-icon slot="start" ios="star-outline" md="star-sharp"></ion-icon>
+              <ion-label>Mis favoritos</ion-label>
+            </ion-item>
+          </ion-menu-toggle> -->
+
+          <ion-menu-toggle auto-hide="false" *ngIf="userService.user.isLogged">
+            <ion-item routerDirection="root" routerLink="cart" lines="none" detail="false" [class.selected]="selectedIndex == i">
+              <ion-icon slot="start" ios="cart-outline" md="cart-sharp"></ion-icon>
+              <ion-label>Mi carrito</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+
+          <ion-menu-toggle auto-hide="false" *ngIf="userService.user.isLogged">
+            <ion-item routerDirection="root" routerLink="orders" lines="none" detail="false" [class.selected]="selectedIndex == i">
+              <ion-icon slot="start" ios="checkmark-done-outline" md="checkmark-done-outline"></ion-icon>
+              <ion-label>Historial de pedidos</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+
+          <ion-menu-toggle auto-hide="false">
+            <ion-item routerDirection="root" routerLink="shop" lines="none" detail="false" [class.selected]="selectedIndex == i">
+              <ion-icon slot="start" ios="pricetag-outline" md="pricetag-sharp"></ion-icon>
+              <ion-label>Menu de productos</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+          
+          <ion-item-divider color="transparent" style="margin-top:10px;" *ngIf="(userService.user.isLogged) && (userService.userdata.rolID == 2)">Mis asignaciones</ion-item-divider>
+
+          <ion-menu-toggle auto-hide="false" *ngIf="(userService.user.isLogged) && (userService.userdata.rolID == 2)">
+            <ion-item routerDirection="root" routerLink="asignedOrders" lines="none" detail="false" [class.selected]="selectedIndex == i">
+              <ion-icon slot="start" ios="analytics-outline" md="analytics-outline"></ion-icon>
+              <ion-label>Pedidos asignados</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+
+          <ion-item-divider color="transparent" style="margin-top:10px;">Soporte</ion-item-divider>
+
+          <ion-menu-toggle auto-hide="false">
+            <a href="whatsapp://send?phone=+18492484192" style="text-decoration: none;">
+              <ion-item lines="none" detail="false" [class.selected]="selectedIndex == i">
+                <ion-icon slot="start" ios="logo-whatsapp" md="logo-whatsapp"></ion-icon>
+                <ion-label>
+                  <p>Contactanos</p>
+                  <p>(849) 248-4192</p>
+                </ion-label>
+              </ion-item>
+            </a>
+          </ion-menu-toggle>
+          
+          <!-- <ion-menu-toggle auto-hide="false">
+            <ion-item routerDirection="root" routerLink="home" lines="none" detail="false" [class.selected]="selectedIndex == i">
+              <ion-icon slot="start" ios="logo-whatsapp" md="logo-whatsapp"></ion-icon>
+              <ion-label>Whatsapp</ion-label>
+            </ion-item>
+          </ion-menu-toggle> -->
+
+          <ion-item-divider color="transparent"></ion-item-divider>
+
+          <ion-menu-toggle auto-hide="false" *ngIf="userService.user.isLogged">
+            <ion-item routerDirection="root" (click)="userService.doLogOut()" lines="none" detail="false" [class.selected]="selectedIndex == i">
+              <ion-icon slot="start" ios="exit-outline" md="exit-sharp"></ion-icon>
+              <ion-label>Salir</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+          
+          <ion-menu-toggle auto-hide="false" *ngIf="!userService.user.isLogged">
+            <ion-item routerDirection="root" routerLink="login" lines="none" detail="false">
+              <ion-icon slot="start" ios="exit-outline" md="exit-sharp"></ion-icon>
+              <ion-label>Ingresar</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-list>
+      </ion-content>
+    </ion-menu>
+    <ion-router-outlet id="main-content"></ion-router-outlet>
+  </ion-split-pane>
+</ion-app>

@@ -1,0 +1,39 @@
+<ion-content padding="true" class="background-image" no-scroll>
+  <img id="logo" src="../../assets/images/logo.png">
+
+  <form>
+    <ion-item lines="full">
+      <ion-label position="floating">Nombre de usuario</ion-label>
+      <ion-input type="text"  [(ngModel)]="userService.user.username" required [ngModelOptions]="{standalone: true}"></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Contrase&ntilde;a</ion-label>
+      <ion-input type="password" [(ngModel)]="userService.user.password" required [ngModelOptions]="{standalone: true}"></ion-input>
+    </ion-item>
+
+    <ion-item lines="full" style="margin-top: 30px;">
+      <ion-label>Recuerdame</ion-label>
+      <ion-toggle checked={{userService.user.rememberme}} (ionChange)="remembermeChange($event)"></ion-toggle>
+    </ion-item>
+
+    <ion-row>
+      <ion-col>
+        <ion-button type="submit" color="danger" expand="block" (click)="doLogin()">Iniciar sesi&oacute;n</ion-button>
+      </ion-col>
+    </ion-row>
+    
+    <ion-row>
+      <ion-col>
+        <ion-button type="submit" color="danger" (click)="presentModal()" expand="block">Registrarme</ion-button>
+        
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <a [routerLink]="['/forgot-password']" class="small-text" style="margin-top: 15px;text-align: center;width: 100%;display: block;text-decoration: none;">Olvidaste tu contrase&ntilde;a!</a>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>

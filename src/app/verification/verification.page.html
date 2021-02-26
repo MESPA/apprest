@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Fengos Burguer</ion-title>
+  </ion-toolbar>
+  <ion-toolbar style="text-align:center;">
+    <ion-label>Verificación</ion-label>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item (click)="presentAddressModal()">
+    <ion-icon slot="start" name="map-outline"></ion-icon>
+    <ion-label>
+      <h3>Direccion</h3>
+      <p>{{addressService.addressSelected.fulladdress}}</p>
+    </ion-label>
+    <ion-badge color="mecanica">Editar</ion-badge>
+  </ion-item>
+
+  <ion-list>
+    <ion-item *ngFor="let product of cartService.order.cart; let i = index">
+      <ion-avatar slot="start">
+        <img *ngIf="product.foto != ''" [src]="productService.fotoBasePath + product.foto" />
+        <img *ngIf="product.foto == ''" src="../../assets/images/template-burguer.png" />
+      </ion-avatar>
+      <ion-label>
+        <h2>{{product.nombre}}</h2>
+        <p *ngFor="let option of product.options">{{option}}</p>
+        <h2 style="color:red;">RD$ {{product.precio}}</h2>
+        <p>{{product.comment}}</p>
+      </ion-label>
+      <!-- <ion-button fill="outline" slot="end" (click)=goToMap()>View</ion-button> -->
+      <ion-note slot="end" color="mecanica">
+        <!-- <ion-badge color="light" (click)="cartService.reduceProductQuantity(i)">-</ion-badge> -->
+        <ion-badge color="light">{{product.quantity}}</ion-badge>
+        <!-- <ion-badge color="light" (click)="cartService.sumProductQuantity(i)">+</ion-badge> -->
+      </ion-note>
+    </ion-item>
+  
+    <ion-item *ngIf="cartService.cartCount != 0" style="margin-top: 15px;">
+      <ion-label slot="end" style="text-align: right;">
+        <p>Subtotal: ${{cartService.addDecimalCeroString(cartService.order.subtotal)}}</p>
+        <p>Itbis: ${{cartService.addDecimalCeroString(cartService.order.itbis)}}</p>
+        <p>Servicio: ${{cartService.addDecimalCeroString(cartService.order.service)}}</p>
+        <p>Total: ${{cartService.addDecimalCeroString(cartService.order.total)}}</p>
+      </ion-label>
+    </ion-item>
+  
+    <ion-item *ngIf="cartService.cartCount == 0">
+      <ion-label>No ha seleccionado algun producto!</ion-label>
+    </ion-item>
+   </ion-list>
+
+    <ion-item>
+      <ion-icon slot="start" ios="cash-outline" md="cash-outline"></ion-icon>
+      <ion-label>
+        <h3>Tipo de pago</h3>
+        <p>{{paymentService.paymentSelected.type}}</p>
+      </ion-label>
+      <!-- <ion-badge color="mecanica">Editar</ion-badge> -->
+    </ion-item>
+
+    <ion-item-divider>
+      <ion-label>
+        Indicaciones de entrega
+      </ion-label>
+    </ion-item-divider>
+    <ion-item>
+      <ion-textarea [(ngModel)]="cartService.order.indications" placeholder="Indicaciones"></ion-textarea>
+    </ion-item>
+    
+    <ion-button expand="full" color="mecanica" (click)="cartService.submitOrder()">Enviar orden</ion-button>
+</ion-content>

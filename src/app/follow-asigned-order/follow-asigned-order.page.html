@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Fengos Burguer</ion-title>
+  </ion-toolbar>
+  <ion-toolbar style="text-align:center;">
+    <ion-label>Seguimiento</ion-label>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div id="mapId" style="width: 100%; height: 100%">
+  </div>
+
+  <div class="bottomSheet" (touchmove)="touchMove($event)" (touchend)="touchEnd()">
+
+    <div class="swipe-handler"></div>
+
+    <div class="content ion-padding">
+      <h1>{{mapService.order.cliente}}</h1>
+      <p>{{mapService.order.direccion}}</p>
+      
+      <ion-progress-bar *ngIf="mapService.status < 2" color="mecanica" type="indeterminate" buffer="0.5"></ion-progress-bar>
+      <ion-progress-bar *ngIf="mapService.status == 2" color="warning" value="0.5"></ion-progress-bar>
+      <ion-progress-bar *ngIf="mapService.status == 3" color="success" value="1.0"></ion-progress-bar>
+      
+      <br>
+      
+      <ion-item>
+        <ion-label>
+          <p style="font-weight: bold;">Telefono</p>
+          <p style="font-weight:normal;">{{ mapService.order.telefono }}</p>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          <p style="font-weight: bold;">Total</p>
+          <p style="font-weight:normal;">RD$ {{ mapService.order.total }}</p>
+        </ion-label>
+      </ion-item>
+      <ion-button (click)="mapService.closeOrder()">Cerrar orden</ion-button>
+    </div>
+
+  </div>
+
+</ion-content>
